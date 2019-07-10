@@ -1,0 +1,1037 @@
+<html>
+
+<head>
+<!--<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">  -->
+
+<title>Large HTML page with images</title>
+
+<!-- The following link block and style block present methods how to load external CSS documents.
+     The link tag forces an immediate download of the CSS document whereas the import clause in
+     the style block has the document downloaded some random time later.  -->
+
+<link href="htmlparser/sections.css" rel="stylesheet" type="text/css">
+
+
+<!--
+<style type="text/css">
+@import url(htmlparser/sections.css);
+</style> 
+-->
+
+</head>
+
+<body>
+<div align="center"><center>
+<h1 class="fore">When to load CSS</h1>
+
+<table border="0" cellspacing="5" width="100%" bgcolor="#F2F2FF">
+  <tr>
+    <td><p align="left"><font color="#000080" size="5" face="Tahoma"><strong>Large HTML page
+    with Images</strong></font></td>
+  </tr>
+</table>
+</center></div>
+
+<hr>
+
+<p><strong><small><font face="Verdana">This page shall test if the recorder generates
+scripts with requests in correct order. It includes images in sequential order: stadyn_image1.gif
+through stadyn_image10.gif</font></small></strong></p>
+
+<hr>
+
+<p><img src="stadyn_image1.gif" width="70" height="70" alt="stadyn_image1.gif (6512 bytes)"><br>
+stadyn_image1</p>
+
+<p><img src="stadyn_image2.gif" width="70" height="70" alt="stadyn_image2.gif (5983 bytes)"><br>
+stadyn_image2</p>
+
+<p align="center"><b><font SIZE="6">Open Financial Exchange<br>
+Specification 1.0</font></b> </p>
+
+<p align="center"><b><font SIZE="2">February 14, 1997<br>
+</font></b></p>
+
+<p align="center"><b><font SIZE="2">© 1997 CheckFree Corp., Intuit Inc., Microsoft Corp.
+All rights reserved<br>
+<br>
+<br>
+</font></b></p>
+
+<p align="center"><i><b><font SIZE="5">Chapters 1 - 10<br>
+<br>
+<br>
+<br>
+<br>
+</font></b></i></p>
+
+<h1><img src="stadyn_image3.gif" width="70" height="70" alt="stadyn_image3.gif (6537 bytes)"><br>
+<font SIZE="5">stadyn_image3</font></h1>
+
+<h1><img src="stadyn_image4.gif" width="70" height="70" alt="stadyn_image4.gif (6028 bytes)"><br>
+stadyn_image4</h1>
+
+<p><img src="stadyn_image5.gif" width="70" height="70" alt="stadyn_image5.gif (4068 bytes)"><br>
+stadyn_image5</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h1><a NAME="_Toc371408167"><font SIZE="5">Contents</font></a></h1>
+
+<ol>
+  <li><a NAME="_Toc380493239"><font SIZE="6" FACE="Arial">Overview</font></a> </li>
+  <li><a NAME="_Toc380493240"><font SIZE="5" FACE="Arial">Introduction</font></a> </li>
+</ol>
+
+<ol>
+  <li><a NAME="_Toc380493241"><font SIZE="4" FACE="Arial">Design Principles</font></a> </li>
+</ol>
+
+<p><font SIZE="2">The following principles were used in designing Open Financial Exchange:</font>
+</p>
+activities. Open Financial Exchange 1.0 specifies the following services:</font> </p>
+
+<p><font SIZE="1" FACE="Wingdings">n</font><font SIZE="2"> Bank statement download</font> </p>
+
+<p><font SIZE="1" FACE="Wingdings">n</font><font SIZE="2"> Credit card statement download</font>
+</p>
+
+<p><font SIZE="1" FACE="Wingdings">n</font><font SIZE="2"> Funds transfers including
+recurring transfers</font> </p>
+
+<p><font SIZE="1" FACE="Wingdings">n</font><font SIZE="2"> Consumer payments, including
+recurring payments</font> </p>
+
+<p><font SIZE="1" FACE="Wingdings">n</font><font SIZE="2"> Business payments, including
+recurring payments</font> </p>
+
+<p><font SIZE="1" FACE="Wingdings">n</font><font SIZE="2"> Banks</font> </p>
+
+<p><font SIZE="1" FACE="Wingdings">n</font><font SIZE="2"> Brokerage houses</font> </p>
+
+<p><font SIZE="1" FACE="Wingdings">n</font><font SIZE="2"> Merchants</font> </p>
+
+<p><font SIZE="1" FACE="Wingdings">n</font><font SIZE="2"> Processors</font> </p>
+
+<p><font SIZE="1" FACE="Wingdings">n</font><font SIZE="2"> Financial advisors</font> </p>
+
+<p><font SIZE="1" FACE="Wingdings">n</font><font SIZE="2"> Government agencies</font> </p>
+
+<pre>
+<font SIZE="1">POST http://www.fi.com/ofx.cgi HTTP/1.0
+User-Agent:MyApp 5.0
+Content-Type: application/x-ofx
+Content-Length: 1032
+
+OFXHEADER:100
+</font><font
+SIZE="2">DATA:OFXSGML
+VERSION:100
+SECURITY:1
+ENCODING:USASCII
+
+&lt;OFX&gt;
+... Open Financial Exchange requests ...
+&lt;/OFX&gt;</font>
+</pre>
+
+<p><font SIZE="2">A blank line defines the separation between the HTTP headers and the
+start of the actual Open Financial Exchange data. A blank line also separates the Open
+Financial Exchange headers and the actual response. (See Chapter 2, for more information.)</font>
+</p>
+
+<p><font SIZE="2">The structure of a response is similar to the request, with the first
+line containing the standard HTTP result, as shown next. The content length is given in
+bytes.</font> </p>
+
+<pre>
+<font SIZE="1">HTTP 1.0 200 OK
+Content-Type: application/x-ofx
+Content-Length: 8732
+
+OFXHEADER:100
+</font><font
+SIZE="2">DATA:OFXSGML
+VERSION:100
+SECURITY:1
+ENCODING:USASCII
+
+&lt;OFX&gt;
+... Open Financial Exchange responses ...
+&lt;/OFX&gt;</font>
+</pre>
+
+<ol>
+  <li><font SIZE="4" FACE="Arial"><a NAME="_Toc380493244">Request and Response</a> Model</font>
+  </li>
+</ol>
+
+<p><font SIZE="2">The actual file Open Financial Exchange sends is without any extra white
+space between tags.</font> 
+
+<ol>
+  <li><a NAME="_Toc380493245"><font SIZE="5" FACE="Arial">Conventions</font></a> </li>
+</ol>
+
+<p><font SIZE="2">The conventions used in the detailed descriptions include: </font>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="162"><i><font SIZE="1">Tag</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="336"><i><font SIZE="2">Description</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="162"><b><font SIZE="1">&lt;REQUIREDTAG&gt;</font></b> </td>
+    <td WIDTH="336"><font SIZE="2">Required tag (1 or more)</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="162"><b><font SIZE="1">&lt;REQUIREDTAG2&gt;</font></b> </td>
+    <td WIDTH="336"><font SIZE="2">Required tag that occurs only once </font></td>
+  </tr>
+  <tr>
+    <td WIDTH="162"><font SIZE="1">&lt;OPTIONALTAG&gt; </font></td>
+    <td WIDTH="336"><font SIZE="2">Optional tag; this particular one can occur multiple times
+    (0 or more) </font></td>
+  </tr>
+  <tr>
+    <td WIDTH="162"><font SIZE="1">&lt;SPECIFIC&gt;</font></td>
+    <td WIDTH="336"><font SIZE="2">Values are A, B, and C</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="162"><font SIZE="1">&lt;ALPHAVALUE&gt;</font></td>
+    <td WIDTH="336"><font SIZE="2">Takes an alphanumeric value up to 32 characters,<i> A-32</i></font>
+    </td>
+  </tr>
+</table>
+
+<ol>
+  <li><a NAME="_Toc380493246"><font SIZE="6" FACE="Arial">Structure</font></a> </li>
+</ol>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="84"><i><font SIZE="1">Code</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="96"><i><font SIZE="2">Meaning</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="312"><i><font SIZE="2">Action</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="84"><font SIZE="1">200</font></td>
+    <td WIDTH="96"><font SIZE="2">OK</font> </td>
+    <td WIDTH="312"><font SIZE="2">The request was processed and a valid Open Financial
+    Exchange result is returned.</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="84"><font SIZE="1">400s</font></td>
+    <td WIDTH="96"><font SIZE="2">Bad request</font> </td>
+    <td WIDTH="312"><font SIZE="2">The request was invalid and was not processed. Clients will
+    report an internal error to the user.</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="84"><font SIZE="1">500s</font></td>
+    <td WIDTH="96"><font SIZE="2">Server error</font> </td>
+    <td WIDTH="312"><font SIZE="2">The server is unavailable. Clients should advise the user
+    to retry shortly.</font> </td>
+  </tr>
+</table>
+
+<p><i><b>NOTE:</b> Open Financial Exchange returns a code 400 only if it cannot parse the
+file. Open Financial Exchange handles content errors such as wrong PIN, or invalid
+account, by returning a valid Open Financial Exchange response along with code 200.</i> </p>
+
+<p>Open Financial Exchange requires the following HTTP standard headers: </p>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="84"><i><font SIZE="1">Code</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="96"><i><font SIZE="2">Value</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="312"><i><font SIZE="2">Explanation</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="84"><font SIZE="1">Content-type</font></td>
+    <td WIDTH="96"><font SIZE="2">application/x-ofx</font> </td>
+    <td WIDTH="312"><font SIZE="2">The MIME type for Open Financial Exchange</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="84"><font SIZE="1">Content-length</font></td>
+    <td WIDTH="96"><font SIZE="2">length</font> </td>
+    <td WIDTH="312"><font SIZE="2">Length of the data after removing HTTP headers</font> </td>
+  </tr>
+</table>
+
+<pre>
+
+</pre>
+
+<p><font SIZE="2">When responding with multi-part MIME, the main type will be
+multi-part/x-mixed-replace; <br>
+one of the parts will use application/x-ofx.</font> 
+
+<ol>
+  <li><a NAME="_Toc380493248"><font SIZE="5" FACE="Arial">Open Financial Exchange Headers</font></a>
+  </li>
+</ol>
+
+<pre>
+<font SIZE="1">OFXHEADER:100</font>
+</pre>
+
+<p><font SIZE="2">This document defines version 1.0 of the headers to contain at least the
+following additional tags:</font> </p>
+
+<pre>
+<font SIZE="1">DATA:OFXSGML
+VERSION:100
+SECURITY: 
+ENCODING:
+</font><font SIZE="2">CHARSET:
+COMPRESSION:
+OLDFILEUID:
+NEWFILEUID:</font>
+</pre>
+
+<ol>
+  <li><a NAME="_Toc380493249"><font SIZE="4" FACE="Arial">The Meaning of Version Numbers</font></a>
+  </li>
+</ol>
+
+
+<ol>
+  <li><a NAME="_Toc380493250"><font SIZE="5" FACE="Arial">SGML Details</font></a> </li>
+  <li><a NAME="_Toc380493251"><font SIZE="4" FACE="Arial">Compliance</font></a> </li>
+</ol>
+
+<ol>
+  <li><a NAME="_Toc380493252"><font SIZE="4" FACE="Arial">Special Characters</font></a> </li>
+</ol>
+
+<p><font SIZE="2">The following characters are special to SGML. Use the given alternative
+sequence to represent them:</font> </p>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="162"><i><font SIZE="1">Character</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="336"><i><font SIZE="2">Escape sequence</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="162"><font SIZE="1">&lt; (less than)</font></td>
+    <td WIDTH="336"><font SIZE="2">&amp;lt;</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="162"><font SIZE="1">&gt; (greater than)</font></td>
+    <td WIDTH="336"><font SIZE="2">&amp;gt;</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="162"><font SIZE="1">&amp; (ampersand)</font></td>
+    <td WIDTH="336"><font SIZE="2">&amp;amp;</font> </td>
+  </tr>
+</table>
+
+<ol>
+  <li><a NAME="_Toc380493253"><font SIZE="5" FACE="Arial">Open Financial Exchange SGML
+    Structure</font></a> </li>
+  <li><a NAME="_Toc380493254"><font SIZE="4" FACE="Arial">Overview</font></a> </li>
+</ol>
+
+<p><font SIZE="2">Open Financial Exchange hierarchically organizes request and response
+blocks:</font> </p>
+
+
+<p><font SIZE="2">The following sections describe each of these levels.</font> 
+
+<ol>
+  <li><a NAME="_Toc380493255"><font SIZE="4" FACE="Arial">Top Level</font></a> </li>
+</ol>
+
+<p><font SIZE="2">An Open Financial Exchange request or response has the following
+top-level form:</font> </p>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="162"><i><font SIZE="1">Tag</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="336"><i><font SIZE="2">Description</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="162"><font SIZE="1">&lt;<b>OFX</b>&gt;</font></td>
+    <td WIDTH="336"><font SIZE="2">Opening tag</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="162"><font SIZE="1">... Open Financial Exchange requests or responses ...</font>
+    </td>
+    <td WIDTH="336"><font SIZE="2">0 or more transaction requests and responses inside
+    appropriate message set aggregates</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="162"><font SIZE="1">&lt;/<b>OFX</b>&gt;</font></td>
+    <td WIDTH="336"><font SIZE="2">Closing tag for the Open Financial Exchange record</font> </td>
+  </tr>
+</table>
+
+<p>This chapter specifies the order of requests and responses. </p>
+
+<p>A single file can contain multiple &lt;OFX&gt; ... &lt;/OFX&gt; blocks. A typical use
+of multiple blocks is to request in a single file information associated with different
+users. 
+
+<ol>
+  <li><a NAME="_Toc380493256"><font SIZE="4" FACE="Arial">Messages</font></a> </li>
+</ol>
+
+<pre>
+<font SIZE="1">&lt;OFX&gt;
+	&lt;SIGNONMSGSRQV1&gt;	&lt;!-- Signon message set --&gt;
+		&lt;SONRQ&gt;				&lt;!-- Signon message --&gt;
+		...
+		&lt;/SONRQ&gt;
+	&lt;/SIGNONMSGSRQV1&gt;
+
+	&lt;BANKMSGSRQV1&gt;		&lt;!-- Banking message set --&gt;
+		&lt;STMTTRNRQ&gt;		&lt;!-- Statement request --&gt;
+		...
+		&lt;/STMTTRNRQ&gt;
+		&lt;STMTTRNRQ&gt;		&lt;!-- Another stmt request --&gt;
+		...
+		&lt;/STMTTRNRQ&gt;
+		&lt;INTRATRNRQ&gt;		&lt;!-- Intra-bank transfer request --&gt;
+		...
+		&lt;/INTRATRNRQ&gt;
+	&lt;/BANKMSGSRQV1&gt;
+&lt;/OFX&gt;</font>
+</pre>
+
+<p><font SIZE="2">Message sets, if used at all, must appear in the following order:</font>
+
+<ul>
+  <li><font SIZE="2">Signon</font> </li>
+  <li><font SIZE="2">Signup</font> </li>
+  <li><font SIZE="2">Banking</font> </li>
+  <li><font SIZE="2">Credit card statements</font> </li>
+  <li><font SIZE="2">Investment statements</font> </li>
+  <li><font SIZE="2">Interbank funds transfers</font> </li>
+  <li><font SIZE="2">Wire funds transfers</font> </li>
+  <li><font SIZE="2">Payments</font> </li>
+  <li><font SIZE="2">General e-mail</font> </li>
+  <li><font SIZE="2">Investment security list</font> </li>
+  <li><font SIZE="2">FI Profile</font> </li>
+</ul>
+
+<p><font SIZE="2">The definition of each message set can further prescribe an order of its
+messages within that message set.</font> 
+
+<ol>
+  <li><a NAME="_Toc380493258"><font SIZE="4" FACE="Arial">Transactions</font></a> </li>
+</ol>
+
+<p><font SIZE="2">A typical request is as follows:</font> </p>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="132"><i><font SIZE="1">Tag</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="366"><i><font SIZE="2">Description</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;<b><i>XXX</i>TRNRQ&gt;</b></font></b> </td>
+    <td WIDTH="366"><font SIZE="2">Transaction-request aggregate</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;TRNUID&gt;</font></b></td>
+    <td WIDTH="366"><font SIZE="2">Client-assigned globally unique ID for this transaction <i>trnuid</i></font>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;CLTCOOKIE&gt;</font></td>
+    <td WIDTH="366"><font SIZE="2">Data to be echoed in the transaction response <i>A-32</i></font>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;TAN&gt;</font></td>
+    <td WIDTH="366"><font SIZE="2">Transaction authorization number; used in some countries
+    with some types of transactions. Country-specific documentation will define messages that
+    require a TAN, <i>A-80</i></font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">specific request</font></td>
+    <td WIDTH="366"><font SIZE="2">Aggregate for the specific request</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;/<b><i>XXX</i>TRNRQ&gt;</b></font></b> </td>
+    <td WIDTH="366">&nbsp;</td>
+  </tr>
+</table>
+
+<p>A typical response is as follows:<br>
+</p>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="132"><i><font SIZE="1">Tag</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="366"><i><font SIZE="2">Description</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;<b><i>XXX</i>TRNRS&gt;</b></font></b> </td>
+    <td WIDTH="366"><font SIZE="2">Transaction-response aggregate</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;TRNUID&gt;</font></b></td>
+    <td WIDTH="366"><font SIZE="2">Client-assigned globally unique ID for this transaction, <i>trnuid</i></font>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;CLTCOOKIE&gt;</font></td>
+    <td WIDTH="366"><font SIZE="2">Client-provided data, <b>REQUIRED</b> if provided in
+    request, <i>A-32</i></font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;STATUS&gt;</font></b></td>
+    <td WIDTH="366"><font SIZE="2">Status aggregate</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;/STATUS&gt;</font></b> </td>
+    <td WIDTH="366">&nbsp;</td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">response record</font></td>
+    <td WIDTH="366"><font SIZE="2">Aggregate for the specific response</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;/<b><i>XXX</i>TRNRS&gt;</b></font></b> </td>
+    <td WIDTH="366">&nbsp;</td>
+  </tr>
+</table>
+
+<ol>
+  <li><a NAME="_Toc380493259"><font SIZE="5" FACE="Arial">The Signon Message Set</font></a> </li>
+</ol>
+
+<p><font SIZE="2">The Signon message set includes the signon message and the PIN change
+message, and must appear in that order. The &lt;SIGNONMSGSRQV1&gt; and
+&lt;SIGNONMSGSRSV1&gt; aggregates wrap the message.</font> 
+
+<ol>
+  <li><a NAME="_Toc380493260"><font SIZE="4" FACE="Arial">Signon &lt;SONRQ&gt; &lt;SONRS&gt;</font></a>
+  </li>
+</ol>
+
+<ol>
+  <li><font SIZE="2" FACE="Arial">Record Request &lt;SONRQ&gt;</font> </li>
+</ol>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="132"><font SIZE="2">Tag</font></td>
+    <td BGCOLOR="#000000" WIDTH="366"><font SIZE="2">Description</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;SONRQ&gt;</font></b></td>
+    <td WIDTH="366"><font SIZE="2">Record- request aggregate</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;<b>DTCLIENT</b>&gt;</font> </td>
+    <td WIDTH="366"><font SIZE="2">Date and time of the request from the client computer, <i>datetime</i></font>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;USERID&gt;</font></b></td>
+    <td WIDTH="366"><font SIZE="2">User identification string. Use &lt;USERID&gt; &amp;
+    &lt;USERPASS&gt;, or &lt;USERKEY&gt;, but not both; <i>A-32</i></font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;USERPASS&gt;</font></b> </td>
+    <td WIDTH="366"><font SIZE="2">User password on server - either &lt;USERID&gt; &amp;
+    &lt;USERPASS&gt; are used, or &lt;USERKEY&gt;, but not both;<i> A-32</i></font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;USERKEY&gt;</font></td>
+    <td WIDTH="366"><font SIZE="2">Login using previously authenticated context - use
+    &lt;USERID&gt; &amp; &lt;USERPASS&gt;, or &lt;USERKEY&gt;, but not both; <i>A-64</i></font>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;GENUSERKEY&gt;</font></td>
+    <td WIDTH="366"><font SIZE="2">Request server to return a USERKEY for future use, <i>Boolean</i></font>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;LANGUAGE&gt;</font></b> </td>
+    <td WIDTH="366"><font SIZE="2">Requested language for text responses, <i>language</i></font>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;SESSCOOKIE&gt;</font></td>
+    <td WIDTH="366"><font SIZE="2">Session cookie, value received in previous &lt;SONRS&gt;,
+    not sent if first login or if none sent by FI <i>A-1000</i></font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;FI&gt;</font></td>
+    <td WIDTH="366"><font SIZE="2">Financial-Institution-identification aggregate</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;/FI&gt;</font></td>
+    <td WIDTH="366">&nbsp;</td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;APPID&gt;</font></b></td>
+    <td WIDTH="366"><font SIZE="2">ID of client application, <i>A-5</i></font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;APPVER&gt;</font></b></td>
+    <td WIDTH="366"><font SIZE="2">Version of client application, <i>N-4</i> (6.00 encoded as
+    0600)</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;/SONRQ&gt;</font></b></td>
+    <td WIDTH="366">&nbsp;</td>
+  </tr>
+</table>
+
+<ol>
+  <li><font SIZE="2" FACE="Arial">Response &lt;SONRS&gt;</font> </li>
+</ol>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="132"><i><font SIZE="1">Tag</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="366"><i><font SIZE="2">Description</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;SONRS&gt;</font></b></td>
+    <td WIDTH="366"><font SIZE="2">Record-response aggregate</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;STATUS&gt;</font></b></td>
+    <td WIDTH="366"><font SIZE="2">Status aggregate, see list of possible code values</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;DTSERVER&gt;</font></b> </td>
+    <td WIDTH="366"><font SIZE="2">Date and time of the server response, <i>datetime</i></font>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;USERKEY&gt;</font></td>
+    <td WIDTH="366"><font SIZE="2">Use user key that instead of USERID and USERPASS for
+    subsequent requests. TSKEYEXPIRE can limit lifetime</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;TSKEYEXPIRE&gt;</font></td>
+    <td WIDTH="366"><font SIZE="2">Date and time that USERKEY expires</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1"><b>&lt;LANGUAGE</b>&gt;</font> </td>
+    <td WIDTH="366"><font SIZE="2">Language used in text responses, <i>language</i></font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;DTPROFUP&gt;</font></b> </td>
+    <td WIDTH="366"><font SIZE="2">Date and time of last update to profile information for any
+    service supported by this FI (see Chapter 7), <i>datetime</i></font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;DTACCTUP&gt;</font></b> </td>
+    <td WIDTH="366"><font SIZE="2">Date and time of last update to account information (see
+    Chapter 8), <i>datetime</i></font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;FI&gt;</font></td>
+    <td WIDTH="366"><font SIZE="2">Financial-Institution-identification aggregate</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;/FI&gt;</font></td>
+    <td WIDTH="366">&nbsp;</td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;SESSCOOKIE&gt;</font></td>
+    <td WIDTH="366"><font SIZE="2">Session cookie that the client should return on the next
+    &lt;SONRQ&gt; <br>
+    <i>A-1000</i></font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;/SONRS&gt;</font></b></td>
+    <td WIDTH="366">&nbsp;</td>
+  </tr>
+</table>
+
+<p>List of status code values for the &lt;CODE&gt; element of &lt;STATUS&gt;: <br>
+</p>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="60"><i><font SIZE="1">Value</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="438"><i><font SIZE="2">Meaning</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="60"><font SIZE="1">0</font></td>
+    <td WIDTH="438"><font SIZE="2">Success (INFO)</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="60"><font SIZE="1">2000</font></td>
+    <td WIDTH="438"><font SIZE="2">General error (ERROR)</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="60"><font SIZE="1">15000</font></td>
+    <td WIDTH="438"><font SIZE="2">Must change PIN (INFO)</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="60"><font SIZE="1">15500</font></td>
+    <td WIDTH="438"><font SIZE="2">Signon (for example, user ID or password) invalid (ERROR)</font>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="60"><font SIZE="1">15501</font></td>
+    <td WIDTH="438"><font SIZE="2">Customer account already in use (ERROR)</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="60"><font SIZE="1">15502</font></td>
+    <td WIDTH="438"><font SIZE="2">PIN Lockout (ERROR)</font> </td>
+  </tr>
+</table>
+
+<ol>
+  <li><font SIZE="2" FACE="Arial">Financial Institution ID &lt;FI&gt;</font> </li>
+</ol>
+
+<p><font SIZE="2">Some service providers support multiple FIs, and assign each FI an ID.
+The signon allows clients to pass this information along, so that providers will know to
+which FI the user is actually doing a signon.</font> </p>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="132"><i><font SIZE="1">Tag</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="366"><i><font SIZE="2">Description</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;FI&gt;</font></b></td>
+    <td WIDTH="366"><font SIZE="2">FI-record aggregate</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;ORG&gt;</font></b></td>
+    <td WIDTH="366"><font SIZE="2">Organization defining this FI name space, <i>A-32</i></font>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;FID&gt;</font></td>
+    <td WIDTH="366"><font SIZE="2">Financial Institution ID (unique within &lt;ORG&gt;), <i>A-32</i></font>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;/FI&gt;</font></b></td>
+    <td WIDTH="366">&nbsp;</td>
+  </tr>
+</table>
+
+<ol>
+  <li><a NAME="_Toc380493261"><font SIZE="4" FACE="Arial">PIN Change &lt;PINCHRQ&gt;
+    &lt;PINCHRS&gt;</font></a> </li>
+</ol>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="132"><i><font SIZE="1">Tag</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="366"><i><font SIZE="2">Description</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;PINCHRQ&gt;</font></b></td>
+    <td WIDTH="366"><font SIZE="2">PIN-change-request aggregate</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;USERID&gt;</font></b></td>
+    <td WIDTH="366"><font SIZE="2">User identification string. Often a social security number,
+    but if so, does not include any check digits, <i>A-32</i></font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;NEWUSERPASS&gt;</font></b> </td>
+    <td WIDTH="366"><font SIZE="2">New user password, <i>A-32</i></font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;/PINCHRQ&gt;</font></b> </td>
+    <td WIDTH="366">&nbsp;</td>
+  </tr>
+</table>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="132"><i><font SIZE="1">Tag</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="366"><i><font SIZE="2">Description</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;PINCHRS&gt;</font></b></td>
+    <td WIDTH="366"><font SIZE="2">PIN-change-response aggregate</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;USERID&gt;</font></b></td>
+    <td WIDTH="366"><font SIZE="2">User identification string. Often a social security number,
+    but if so, does not include any check digits, <i>A-32</i></font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">&lt;DTCHANGED&gt;</font></td>
+    <td WIDTH="366"><font SIZE="2">Date and time the password was changed, <i>datetime</i></font>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;/PINCHRS&gt;</font></b> </td>
+    <td WIDTH="366">&nbsp;</td>
+  </tr>
+</table>
+
+<ol>
+  <li><font SIZE="2" FACE="Arial">Status Code Values for the &lt;CODE&gt; Element of
+    &lt;STATUS&gt;</font> </li>
+</ol>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="60"><i><font SIZE="1">Value</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="438"><i><font SIZE="2">Meaning</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="60"><font SIZE="1">0</font></td>
+    <td WIDTH="438"><font SIZE="2">Success (INFO)</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="60"><font SIZE="1">2000</font></td>
+    <td WIDTH="438"><font SIZE="2">General error (ERROR)</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="60"><font SIZE="1">15503</font></td>
+    <td WIDTH="438"><font SIZE="2">Could not change PIN (ERROR)</font> </td>
+  </tr>
+</table>
+
+<ol>
+  <li><a NAME="_Toc380493262"><font SIZE="4" FACE="Arial">Examples</font></a> </li>
+</ol>
+
+<p><b><font SIZE="2">User requests a password change: </font></b></p>
+
+<pre>
+<font SIZE="2">&lt;PINCHTRNRQ&gt;
+	&lt;TRNUID&gt;888
+	&lt;PINCHRQ&gt;
+		&lt;USERID&gt;123456789
+		&lt;NEWUSERPASS&gt;5321
+	&lt;/PINCHRQ&gt;
+&lt;/PINCHTRNRQ&gt;</font>
+</pre>
+
+<p><b><font SIZE="2">The server responds with: </font></b></p>
+
+<pre>
+<font SIZE="1">&lt;PINCHTRNRS&gt;
+	&lt;TRNUID&gt;888
+	&lt;STATUS&gt;
+		&lt;CODE&gt;0
+		&lt;SEVERITY&gt;INFO
+	&lt;/STATUS&gt;
+	&lt;PINCHRS&gt;
+		&lt;USERID&gt;123456789
+	&lt;/PINCHRS&gt;
+&lt;/PINCHTRNRS&gt;</font>
+</pre>
+
+<ol>
+  <li><a NAME="_Toc380493263"><font SIZE="5" FACE="Arial">External Data Support</font></a> </li>
+</ol>
+
+<p><font SIZE="2">Some data, such as binary data, cannot be easily sent directly within
+SGML. For these situations, the specification will define a tag that contains a reference
+to some external data. The way that clients pick up the external data depends on the
+transport used. For the HTTP-based transport described in this document, servers can send
+the data in one of two ways:</font> 
+
+<ul>
+  <li><font SIZE="2">Send the same response, using multi-part MIME types to separate the
+    response into basic <br>
+    Open Financial Exchange and one or more external data files</font> </li>
+  <li><font SIZE="2">Client can make a separate HTTP get against the supplied URL, if it
+    really needs the data </font></li>
+</ul>
+
+<p><font SIZE="2">For example, to retrieve a logo, a &lt;GETMIMERS&gt; might answer a
+&lt;GETMIMERQ&gt; as follows: </font></p>
+
+<pre>
+<font SIZE="1">&lt;GETMIMERS&gt;
+	&lt;URL&gt;https://www.fi.com/xxx/yyy/zzz.html
+&lt;/GETMIMERS&gt;</font>
+</pre>
+
+<p><font SIZE="2">If the file sent includes the same response using multi-part MIME,
+clients will assume it has the local file, zzz.jpg.</font> 
+
+<ol>
+  <li><a NAME="_Toc380493264"><font SIZE="5" FACE="Arial">Extensions to Open Financial
+    Exchange</font></a> </li>
+</ol>
+
+<p><font SIZE="2">An organization that provides a customized client and server that
+communicate by means of <br>
+Open Financial Exchange might wish to add new requests and responses or even specific
+elements to existing requests and responses. To ensure that each organization can extend
+the specification without the risk of conflict, Open Financial Exchange defines a style of
+tag naming that lets each organization have its own name space.</font> </p>
+
+<p><font SIZE="2">Organizations can register a specific tag name prefix. (The specific
+procedure or organization to manage this registration will be detailed at a later time.)
+If an organization registers &quot;ABC,&quot; then they can safely add new tags named
+&lt;ABC.SOMETHING&gt; without</font> 
+
+<ul>
+  <li><font SIZE="2">Colliding with another party wishing to extend the specification</font> </li>
+  <li><font SIZE="2">Confusing a client or server that does not support the extension</font> </li>
+</ul>
+
+<p><font SIZE="2">The extensions are not considered proprietary. An organization is free
+to publish their extensions and encourage client and server implementers to support them.</font>
+</p>
+
+<p><font SIZE="2">All tag names that do not contain a period (.) are reserved for use in
+future versions of the core <br>
+Open Financial Exchange specification.<br>
+</font>
+
+<ol>
+  <li><a NAME="_Toc380493265"><font SIZE="6" FACE="Arial">Common Aggregates, Elements, and
+    Data Types</font></a> </li>
+  <li><a NAME="_Toc380493266"><font SIZE="5" FACE="Arial">Common Aggregates</font></a> </li>
+</ol>
+
+<p><font SIZE="2">This section describes aggregates used in more than one service of Open
+Financial Exchange (for example, investments and payments).</font> 
+
+<ol>
+  <li><a NAME="_Toc380493267"><font SIZE="4" FACE="Arial">Identifying Financial Institutions
+    and Accounts</font></a> </li>
+</ol>
+
+<p><font SIZE="2">Open Financial Exchange does not provide a universal space for
+identifying financial institutions, accounts, or types of accounts. The way to identify an
+FI and an account at that FI depends on the service. For information about
+service-specific ID aggregates, see Chapters 11, 12, and 13 on banking, payments, and
+investments.</font> 
+
+<ol>
+  <li><a NAME="_Toc380493268"><font SIZE="4" FACE="Arial">Balance Records &lt;BAL&gt;</font></a>
+  </li>
+</ol>
+
+<p><font SIZE="2">Several responses allow FIs to send an arbitrary set of balance
+information as part of a response, for example a bank statement download. FIs might want
+to send information on outstanding balances, payment dates, interest rates, and so forth.
+Balances can report the date the given balance reflects in &lt;DTASOF&gt;.</font> </p>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="132"><i><font SIZE="1">Tag</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="300"><i><font SIZE="2">Description</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;BAL&gt;</font></b></td>
+    <td WIDTH="300"><font SIZE="2">Balance-response aggregate</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;NAME&gt;</font></b></td>
+    <td WIDTH="300"><font SIZE="2">Balance name, <i>A-20</i></font></td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;DESC&gt;</font></b></td>
+    <td WIDTH="300"><font SIZE="2">Balance description, <i>A-80</i></font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;BALTYPE&gt;</font></b> </td>
+    <td WIDTH="300"><font SIZE="2">Balance type. <br>
+    DOLLAR = dollar (value formatted DDDDcc)<br>
+    PERCENT = percentage (value formatted XXXX.YYYY)<br>
+    NUMBER = number (value formatted as is)</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;VALUE&gt;</font></b></td>
+    <td WIDTH="300"><font SIZE="2">Balance value.<br>
+    Interpretation depends on &lt;BALTYPE&gt; field, <i>N-20</i></font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1" FACE="Arial">&lt;CURRENCY&gt;</font> </td>
+    <td WIDTH="300"><font SIZE="2">If dollar formatting, can optionally include currency</font>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1" FACE="Arial">&lt;DTASOF&gt;</font> </td>
+    <td WIDTH="300"><font SIZE="2">Effective date of the given balance, <i>datetime</i></font>
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;/BAL&gt;</font></b></td>
+    <td WIDTH="300">&nbsp;</td>
+  </tr>
+</table>
+
+<ol>
+  <li><a NAME="_Toc380493269"><font SIZE="4" FACE="Arial">Error Reporting &lt;STATUS&gt;</font></a>
+  </li>
+</ol>
+
+<p><font SIZE="2">To provide as much feedback as possible to clients and their users, Open
+Financial Exchange defines a &lt;STATUS&gt; aggregate. The most important element is the
+code that identifies the error. Each response defines the codes it uses. Codes 0 through
+2999 have common meanings in all Open Financial Exchange transactions. Codes from 3000 and
+up have meanings specific to each transaction.</font> </p>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="132"><i><font SIZE="1">Tag</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="300"><i><font SIZE="2">Description</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;STATUS&gt;</font></b></td>
+    <td WIDTH="300"><font SIZE="2">Error-reporting aggregate.</font></td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;CODE&gt;</font></b></td>
+    <td WIDTH="300"><font SIZE="2">Error code, <i>N-6</i></font></td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;SEVERITY&gt;</font></b> </td>
+    <td WIDTH="300"><font SIZE="2">Severity of the error: <br>
+    INFO = Informational only<br>
+    WARN = Some problem with the request occurred but valid response still present<br>
+    ERROR = A problem severe enough that response could not be made</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1" FACE="Arial">&lt;MESSAGE&gt;</font> </td>
+    <td WIDTH="300"><font SIZE="2">A textual explanation from the FI. Note that clients will
+    generally have messages of their own for each error ID. Use this tag only to provide more
+    details or for the General errors.</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><b><font SIZE="1">&lt;/STATUS&gt;</font></b></td>
+    <td WIDTH="300">&nbsp;</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><img src="stadyn_image6.gif" width="70" height="70" alt="stadyn_image6.gif (4356 bytes)"><br>
+stadyn_image6</p>
+
+<p><img src="stadyn_image7.gif" width="223" height="72" alt="stadyn_image7.gif (1702 bytes)"><br>
+stadyn_image7</p>
+
+<p>For general errors, the server can respond with one of the following &lt;CODE&gt;
+values. However, not all codes are possible in a specific context. </p>
+
+<table BORDER="1">
+  <tr>
+    <td BGCOLOR="#000000" WIDTH="132"><i><font SIZE="1">Code</font></i> </td>
+    <td BGCOLOR="#000000" WIDTH="366"><i><font SIZE="2">Meaning</font></i> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">0</font></td>
+    <td WIDTH="366"><font SIZE="2">Success (INFO)</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">2000</font></td>
+    <td WIDTH="366"><font SIZE="2">General error (ERROR)</font> </td>
+  </tr>
+  <tr>
+    <td WIDTH="132"><font SIZE="1">2021</font></td>
+    <td WIDTH="366"><font SIZE="2">Unsupported version (ERROR)</font> </td>
+  </tr>
+</table>
